@@ -7,12 +7,15 @@ var sql = require('./db');
 const app = express();
 // app.use(cors());
 
-
+// app.use( (req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 app.listen(PORT, () => {
     console.log('Listening to Port:', PORT);
 })
-
 
 app.get('/stuff', (req, res) => {
     sql.query("SELECT * FROM c918_AP", (err, result) => {
