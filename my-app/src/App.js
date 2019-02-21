@@ -7,7 +7,7 @@ class App extends Component {
 
 
   componentDidMount = () => {
-    axios.get("localhost:3001/stuff").then( (resp) => {
+    axios.get("http://localhost:3001/stuff").then( (resp) => {
       console.log(resp)
     } )
   }
