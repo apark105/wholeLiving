@@ -1,11 +1,13 @@
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const cors = require('cors');
 const PORT = process.env.PORT || 3001;
-var sql = require('./db');
+const address = require('./address');
 
 const app = express();
-// app.use(cors());
+
+app.use(cors());
+
 
 // app.use( (req, res, next) => {
 //     res.header("Access-Control-Allow-Origin", "*");
@@ -13,20 +15,10 @@ const app = express();
 //     next();
 // });
 
+app.use('/stuff', address)
+
 app.listen(PORT, () => {
     console.log('Listening to Port:', PORT);
-})
-
-app.get('/stuff', (req, res) => {
-    sql.query("SELECT * FROM c918_AP", (err, result) => {
-        if(err){
-            res.send(JSON.stringify({"status": 500, "error": err, "response": null})); 
-            //If there is error, we send the error in the error section with 500 status
-        } else {
-            res.send(JSON.stringify({"status": 200, "error": null, "response": result}));
-            //If there is no error, all is good and response is 200OK.
-        }
-      });
 })
 
 
