@@ -15,7 +15,7 @@ app.use(cors());
 //     next();
 // });
 
-app.use('/stuff', address)
+app.use('/wholeFoods', address);
 
 app.listen(PORT, () => {
     console.log('Listening to Port:', PORT);

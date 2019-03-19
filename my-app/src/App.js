@@ -1,32 +1,40 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'; 
+import InputInfo from './input';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
 
-
-  componentDidMount = () => {
-    axios.get("http://localhost:3001/stuff").then( (resp) => {
-      console.log(resp)
-    } )
+    this.state = {
+      wholeFoods: [],
+    }
   }
 
   componentDidMount = () => {
-    axios.get("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=whole%20foods%20market&inputtype=textquery&fields=formatted_address,name,icon,geometry&locationbias=point:34.9592,116.419&key=AIzaSyD-NNZfs0n53D0caUB0M_ERLC2n9psGZfc")
-    .then( (resp)=>{
+    axios.get("http://localhost:3001/wholeFoods").then( (resp) => {
       console.log(resp)
+      this.setState({
+        wholeFoods:resp.data.response
+      })
     } )
-    axios.get("https://maps.googleapis.com/maps/api/place/textsearch/json?query=whole%20foods%20market+in+california&fields=formatted_address,name,icon,geometry&key=AIzaSyD-NNZfs0n53D0caUB0M_ERLC2n9psGZfc")
-    .then( (resp)=>{
-      console.log(resp)
-    } )
+  }
+
+
+  getLatLng = (address) => {
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyD-NNZfs0n53D0caUB0M_ERLC2n9psGZfc`).then( (resp) => {
+      debugger;
+      console.log('what is the axios', resp.data.results[0].geometry.location)
+    } ).catch(err => console.log(err))
   }
 
   render() {
+    console.log(this.state.wholeFoods)
     return (
       <div className="App">
-          Practice React
+          <InputInfo submitAddress={this.getLatLng}/>
       </div>
     );
   }
