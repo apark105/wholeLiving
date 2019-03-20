@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
+import Header from 'react'
 
 class InputInfo extends Component {
     constructor(props){
         super(props) 
 
         this.state = {
-            address: ''
+            address: '',
+            location: '',
         }
     }
 
     submitInfo = (e) => {
         e.preventDefault();
-        this.props.submitAddress(this.state.address)
+        this.props.submitAddress(this.state.address, this.state.location)
+        console.log('location:', this.state.location)
     }
     
     render() {
-        console.log(this.state.address)
+        // console.log('address:', this.state.address)
         return (
             <form onSubmit={this.submitInfo}>
                 <label>Enter Zip Code or Address</label>
@@ -25,6 +28,14 @@ class InputInfo extends Component {
                     })
                    }}>
                 </input>
+                <label>Please enter a location of your preference</label>
+                <input type="text" name="location" value={this.state.location} onChange={(e)=>{
+                    this.setState({
+                        location:e.currentTarget.value
+                    })
+                   }}>
+                </input>
+                <button>Submit</button>
             </form>
         )
     }

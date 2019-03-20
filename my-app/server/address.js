@@ -6,7 +6,7 @@ var sql = require('./db');
 let theQuery = ''
 
 router.post('/infos', (req, res) =>{
-    console.log('where the body', req.body)
+    // console.log('where the body', req.body)
     let latitude = '' + req.body.lat
     let longitude = '' + req.body.lng
     let dist = '25'
@@ -33,7 +33,6 @@ router.post('/infos', (req, res) =>{
 //                 ORDER BY distance ASC`
 
 router.get('/', (req, res) => {
-    // console.log('in the sql', latitude,longitude,dist)
     sql.query(theQuery, (err, result) => {
             if (err) {
                 res.send(JSON.stringify({ "status": 500, "error": err, "response": null }));

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios'; 
 import InputInfo from './input';
+import API_KEY from './helper';
 
 
 class App extends Component {
@@ -10,23 +10,25 @@ class App extends Component {
 
     this.state = {
       wholeFoods: [],
-      latLng: {}
+      latLng: {},
+      keywordSearch: '',
+      keyLocation: []
     }
   }
 
   componentDidMount = () => {
-  
-    this.getGoogleSearch();
-    // this.sendLatLngDB();
-
   }
 
 
-  getLatLng = async (address) => {
+  getLatLng = async (address, location) => {
+
+    var parseWhiteSpaceLocation = location.split(' ').join('+');
+
     await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyD-NNZfs0n53D0caUB0M_ERLC2n9psGZfc`).then( (resp) => {
-      console.log('what is the axios', resp.data.results[0].geometry.location)
+      // console.log('what is the axios', resp.data.results[0].geometry.location)
       this.setState({
         latLng: resp.data.results[0].geometry.location,
+        keywordSearch: parseWhiteSpaceLocation
       })
     } ).catch(err => console.log(err))
 
@@ -46,36 +48,45 @@ class App extends Component {
           'Content-Type': 'application/json',
           "cache-control": "no-cache",
       }
-    }).then( (resp) => {console.log(resp)})
+    })
     this.getWholeFoods();
   }
 
-  getGoogleSearch =()=>{
-    axios.post("http://localhost:3001/googleTextSearch", 
+  getWholeFoods = async () => {
+   await axios.get("http://localhost:3001/wholeFoods").then( (resp) => {
+        console.log(resp)
+        this.setState({
+          wholeFoods:resp.data.response
+        })
+      } )
+      this.getGoogleSearch();
+    }
+
+  getGoogleSearch = async ()=>{
+    const {latLng, keywordSearch} = this.state
+   await axios.post("http://localhost:3001/googleTextSearch", 
       {
         data: {
-          query: 'rockclimbing+gym',
+          query: keywordSearch,
           fields: 'formatted_address,name,geometry',
-          key: '',
-          location: '33.9316733, -117.8604472'
+          key: API_KEY,
+          location: `${latLng.lat}, ${latLng.lng}`
         }, 
+        headers: {
+          'Content-Type': 'application/json',
+          "cache-control": "no-cache",
+      }
       }
     ).then( (resp) => {
-      console.log('here is the resp', resp.data.response['lng'])})
-  }
-
-  getWholeFoods = () => {
-  axios.get("http://localhost:3001/wholeFoods").then( (resp) => {
-      console.log(resp)
       this.setState({
-        wholeFoods:resp.data.response
+        keyLocation: resp.data.response
       })
-    } )
+      console.log('here is the resp', resp)})
   }
 
   render() {
-    console.log(this.state.wholeFoods)
-    console.log('what is lat/lng', this.state.latLng);
+    console.log('keyword', this.state.keywordSearch);
+    console.log('what is the wholeFoods state and keylocation state', this.state.wholeFoods, this.state.keyLocation)
     return (
       <div className="App">
           <InputInfo submitAddress={this.getLatLng}/>
