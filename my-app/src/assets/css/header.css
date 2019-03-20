@@ -15,3 +15,8 @@
     font-size: 6vmax;
     padding: 10px 0;
 }
+
+.landingPageHeader > div {
+    display: inline;
+    cursor: pointer;
+}
