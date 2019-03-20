@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import './assets/css/header.css';
 
 function Header(){
     return (
-        <div>
-            Hello
+        <div className="landingPageHeader">
+            Whole Living
         </div>
     )
 }
