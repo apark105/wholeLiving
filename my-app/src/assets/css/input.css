@@ -1,0 +1,68 @@
+.background {
+    /* background-image: url(../MarbleBackground.jpg);
+    background-size: contain;
+    background-repeat: no-repeat; */
+    width: auto;
+    height: 90%;
+}
+
+.subInfo {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 3vmax;
+    color: #F5634A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: auto;
+    text-align: center;
+}
+
+.formInput {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    height: 50%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5vmax;
+    color: #F5634A;
+    overflow-y: auto;
+}
+
+input {
+    width: 20vw;
+    height: 10%;
+    text-align: center;
+    font-size: 1vmax;
+    background-color: rgb(232, 240, 254);
+    border: 0.5px solid rgb(204, 220, 250);
+    border-radius: 5px;
+}
+
+input:nth-of-type(1) {
+    width: 12vw;
+}
+
+button {
+    height: 15%;
+    width: 12%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5vmax;
+    color: #F5634A;
+    background-color: #FAD089;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    -moz-box-shadow:    3px 3px 5px 0px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 0px #ccc;
+    box-shadow:         3px 3px 5px 0px #ccc;
+}
+
+label, button {
+    margin: 1% 0;
+}

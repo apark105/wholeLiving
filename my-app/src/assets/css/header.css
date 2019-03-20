@@ -1,0 +1,17 @@
+@font-face {
+    font-family: cursiveBold;
+    src: url(../MilasianCircaBoldPERSONAL.ttf);
+}
+
+.landingPageHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+    background-color: #FAD089;
+    color: #F5634A;
+    font-family: cursiveBold;
+    font-size: 6vmax;
+    padding: 10px 0;
+}
