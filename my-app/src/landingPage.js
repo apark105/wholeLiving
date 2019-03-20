@@ -95,14 +95,25 @@ class LandingPage extends Component {
     })
   }
 
+  returnHomePage = () => {
+    console.log('did it work?')
+    this.setState({
+      wholeFoods: [],
+      latLng: {},
+      keywordSearch: '',
+      keyLocation: [],
+      isDataReceived: false,
+    })
+  }
+
   render() {
     const { keyLocation, wholeFoods,isDataReceived, latLng, keywordSearch } = this.state
     // console.log('keyword', this.state.keywordSearch);
     // console.log('what is the wholeFoods state and keylocation state', this.state.wholeFoods, this.state.keyLocation)
     return (
       <div className="overall">
-        <Header/>
-        {isDataReceived ? <GoogleMap keywordSearch={keywordSearch} currentLocation={latLng} wholeFoods={wholeFoods} keyLocation={keyLocation} /> : <InputInfo submitAddress={this.getLatLng}/>}
+        <Header returnHome={this.returnHomePage}/>
+        {isDataReceived ? <GoogleMap keywordSearch={keywordSearch} currentLocation={latLng} wholeFoods={wholeFoods} keyLocation={keyLocation} /> : <InputInfo submitAddress={this.getLatLng} />}
       </div>
     );
   }

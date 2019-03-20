@@ -1,10 +1,11 @@
 import React from 'react';
 import './assets/css/header.css';
 
-function Header(){
+function Header(props){
+    
     return (
-        <div className="landingPageHeader">
-            Whole Living
+        <div onClick={props.returnHome} className="landingPageHeader">
+            <div>Whole Living</div>
         </div>
     )
 }
